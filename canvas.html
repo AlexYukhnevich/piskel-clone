@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Piskel Clone</title>
+<script type="text/javascript" src="index.bundle.js"></script></head>
+<body>
+    <div id="wrapper">
+      <div class="loading">
+        <p class="loading-title">Loading your piskel...</p>
+      </div>
+        <header class="header">
+          <h1 class="title-logo">Piskel</h1>
+          <h2 class="new-piskel-title">New Piskel</h2>
+          <a class="create-sprite" href="canvas.html" target="_blank">Create sprite</a>
+        </header>
+        <main class="main">
+          <section class="toolbar">
+            <ul class="toolbar__nav">
+              <li class="tool tool-active" data-tool ="p"><img id="pen" class="icon" src="./src/start/assets/img/tool-pen.png" alt="pen" title="pen"></li>
+              <li class="tool"  data-tool="m"><img id="mirror-pen" class="icon" src="./src/start/assets/img/tool-vertical-mirror-pen.png" alt="mirror-pen" title="mirror-pen"></li>
+              <li class="tool"  data-tool="b"><img id="paint-bucket" class="icon" src="./src/start/assets/img/tool-paint-bucket.png" alt="paint-bucket" title="paint-bucket"></li>
+              <li class="tool"  data-tool="c"><img id="colorswap" class="icon" src="./src/start/assets/img/tool-colorswap.png" alt="colorswap" title="paint-bucket"></li>
+              <li class="tool"  data-tool="e"><img id="eraser" class="icon" src="./src/start/assets/img/tool-eraser.png" alt="eraser" title="eraser"></li>
+              <li class="tool"  data-tool="s"><img id="stroke" class="icon" src="./src/start/assets/img/tool-stroke.png" alt="stroke" title="stroke"></li>
+              <li class="tool"  data-tool="l"><img id="lighten" class="icon" src="./src/start/assets/img/tool-lighten.png" alt="lighten" title="lighten"></li>
+              <li class="tool"  data-tool="d"><img id="dithering" class="icon" src="./src/start/assets/img/tool-dithering.png" alt="dithering" title="dithering"></li>
+              <li class="tool"  data-tool="f"><img id="transform" class="icon" src="./src/start/assets/img/tool-flip.png" alt="transform" title="transform"></li>
+              <li class="tool"  data-tool="t"><img id="color-picker" class="icon" src="./src/start/assets/img/tool-colorpicker.png" alt="color-picker" title="color-picker"></li>
+            </ul>
+            <div class="toolbar-color">
+              <div class="primary-color"></div>
+              <div class="secondary-color"></div>
+              <input class="choose-color" type="color">
+              <img class="swap-colors" src="./src/start/assets/img/swap-colors.png" alt="swap-colors" title="swap">
+            </div>
+          </section>
+          <section class="framebar">
+            <ul class="framebar__nav">
+              <li class="frame-layer">
+                  <div class="framebar-window framebar-active" data-frame-number="0">
+                      <canvas class="framebar-canvas" data-frame-number="0" width="128" height="128"></canvas>
+                      <div class="framebar-window__number">1</div>
+                      <div class="framebar-window__delete frame-icon delete"><img class="delete" src="./src/start/assets/img/recyclebin.png" alt=""><span class="hint">Delete this frame</span></div>
+                      <div class="framebar-window__drag frame-icon drag"><img class="drag" src="./src/start/assets/img/dragndrop.png" alt=""> <span class="hint">Drag this frame</span></div>
+                      <div class="framebar-window__dublicate frame-icon dublicate"><img class="dublicate" src="./src/start/assets/img/dublicate.png" alt=""><span class="hint">Dublicate this frame</span></div>
+                  </div>
+              </li>
+            </ul>
+            <div class="framebar-window__add add-frame"><span class="add-icon add-frame"></span> <span class="add-text add-frame">Add new frame</span></div>
+          </section>
+          <section class="main-rectangle pen-cursor">
+            <div class="wrapper-canvas">
+              <canvas id="main-canvas" width="384" height="384"></canvas>
+              <div class="pixel"></div>
+            </div>
+          </section>
+          <section class="animate-bar">
+              <div class="small-rectangle">
+                  <canvas id="animate-canvas" width="256" height="256"></canvas>
+                  <footer class="footer-fps">
+                    <div class="wrapper-input">
+                      <label class="label-range" for="range"><span class="amount-of-FPS">0</span> FPS</label>
+                      <input id="range" class="range" type="range" min="0" max="24" step="1" value="0">
+                    </div>
+                  </footer>
+                </div>
+              <div class="canvas-size sidebar">
+                <header class="sidebar-header"><h3 class="sidebar-header__title">Canvas size</h3></header>
+                <div class="wrapper-btn-resolution">
+                  <button class="resolution active-resolution" data-size="32">32 x 32</button>
+                  <button class="resolution" data-size="64">64 x 64</button>
+                  <button class="resolution" data-size="128">128 x 128</button>
+                </div>
+              </div>
+              <table class="data-canvas sidebar">
+                <thead class="data-head">
+                    <th class="size-title">size</th>
+                    <th class="coord-title">(x:y)</th>
+                    <th class="active-frames-title">frames</th>
+                </thead>
+                <tbody class="data-body">
+                    <td class="size">[32x32]</td>
+                    <td class="coord">0:0</td>
+                    <td class="active-frames">1</td>
+                </tbody>
+              </table>
+          </section>
+          <section class="preferences">
+            <ul class="preferences-nav">
+              <li class="preferences-tool">
+                <img class="export" src="./src/start/assets/img/export.png" alt="">
+                <div class="preference-hint">
+                  <h3 class="preference-title">export</h3>
+                  <p>Export file as .gif, .png</p>
+                </div>
+              </li>
+              </ul>
+              <div class="popup-preferences__export">
+                <h3 class="exports-title">Exports</h3>
+                  <div class="export-formats">
+                    <ul class="export-formats__nav">
+                      <li class="format active-format" data-format="gif">GIF</li>
+                      <li class="format" data-format="png">PNG</li>
+                      <li class="format" data-format="jpeg">JPEG</li>
+                    </ul>
+                  </div>
+                  <div class="export-form">
+                    <div class="export-size-wrapper">
+                      <h4 class="export-size__title">Size for export file</h4>
+                      <ul class="export-size__nav">
+                        <li class="export-size export-size-active" data-size="1">32 x 32</li>
+                        <li class="export-size" data-size="2">64 x 64</li>
+                        <li class="export-size" data-size="4">128 x 128</li>
+                      </ul>
+                    </div>
+                    <label class="label-title" for="title">Title</label>
+                    <input class="inp-format-title" type="text" id="title" autocomplete="off">
+                    <button class="export-download">Download</button>
+                  </div>
+              </div>
+          </section>
+        </main>
+        <div class="keyboard">
+          <img class="keyboard-icon" src="./src/start/assets/img/keyboard.png" alt="">
+        </div>
+        <div class="popup-shortcuts">
+          <header class="shortcuts-block-title">
+            <h2 class="shortcuts-title">Keyboard</h2>
+            <div class="shortcuts-close">x</div>
+          </header>
+          <div class="shortcuts-commands-wrapper">
+              <div class="shortcuts-commands">
+                <div class="tools-shortcuts">
+                    <h2 class="tools-shortcuts__title">Tools Shortcuts</h2>
+                    <ul class="tools-shortcuts__nav">
+                      <li class="tool-command"><span class="shortcut" data-shortcut="0">P</span><span>pen</span></li>
+                      <li class="tool-command"><span class="shortcut" data-shortcut="1">M</span><span>mirror-pen</span></li>
+                      <li class="tool-command"><span class="shortcut" data-shortcut="2">B</span><span>paint-bucket</span></li>
+                      <li class="tool-command"><span class="shortcut" data-shortcut="3">C</span><span>magic-bucket</span></li>
+                      <li class="tool-command"><span class="shortcut" data-shortcut="4">E</span><span>eraser</span></li>
+                      <li class="tool-command"><span class="shortcut" data-shortcut="5">S</span><span>stroke</span></li>
+                      <li class="tool-command"><span class="shortcut" data-shortcut="6">L</span><span>lighten</span></li>
+                      <li class="tool-command"><span class="shortcut" data-shortcut="7">D</span><span>dithering</span></li>
+                      <li class="tool-command"><span class="shortcut" data-shortcut="9">T</span><span>color-picker</span></li>
+                    </ul>
+                </div>
+              </div>
+          </div>
+        </div>
+</body>
+</html>
